@@ -1,6 +1,9 @@
 /*********************************
-*********ÓÃÊı×éÊµÏÖÏßĞÔ±í*********
-³õÑ§Õß£¬ÆäÖĞÓĞĞ©´úÂë´íÎó£¬ÓĞ´ıÍêÉÆ
+*********ç”¨æ•°ç»„å®ç°çº¿æ€§è¡¨*********
+åˆå­¦è€…ï¼Œå…¶ä¸­æœ‰äº›ä»£ç é”™è¯¯ï¼Œæœ‰å¾…å®Œå–„
+è¿˜æœ‰ä¸¤ä¸ªå‡½æ•°æ²¡æœ‰å®ç°:
+ElemType LocateElem(SqList L, int i, ElemType compare())
+ElemType ListTraverse(SqList L, ElemType visit())
 **********************************/
 
 
@@ -8,58 +11,58 @@
 #include<iostream>
 
 using namespace std;
-#define Error   -2                                    //´íÎó
-#define False   -1                                    //Ã»ÓĞ·µ»ØÊı¾İÀàĞÍ
-typedef int ElemType;                               //¶¨ÒåÀàĞÍºê
-#define Size 100                                      //¶¨ÒåÒ»¸öÊı×é³¤¶È
+#define Error   -2                                    //é”™è¯¯
+#define False   -1                                    //æ²¡æœ‰è¿”å›æ•°æ®ç±»å‹
+typedef int ElemType;                               //å®šä¹‰ç±»å‹å®
+#define Size 100                                      //å®šä¹‰ä¸€ä¸ªæ•°ç»„é•¿åº¦
 
 typedef struct List {
 	ElemType Array[Size];
-	int ListSize;                                     //ÏßĞÔ±íÈİÁ¿
-	int ListLength;                                   //ÏßĞÔ±íÖĞÒÑ¾­Ê¹ÓÃÁË¶àÉÙÔªËØ
+	int ListSize;                                     //çº¿æ€§è¡¨å®¹é‡
+	int ListLength;                                   //çº¿æ€§è¡¨ä¸­å·²ç»ä½¿ç”¨äº†å¤šå°‘å…ƒç´ 
 }SqList;
 
 
-void InitList(SqList &L)                              //³õÊ¼»¯ÏßĞÔ±í     yes
+void InitList(SqList &L)                              //åˆå§‹åŒ–çº¿æ€§è¡¨     yes
 {
 	L.ListSize = Size;
 	L.ListLength = 0;
 
 }
 
-void DestroyList(SqList &L)                           //Ïú»ÙÏßĞÔ±í      yes
+void DestroyList(SqList &L)                           //é”€æ¯çº¿æ€§è¡¨      yes
 {
 	L.ListSize = 0;
 	L.ListLength = 0;
 }
 
-void ClearList(SqList L)                              //Çå³ıÏßĞÔ±íÖĞµÄÊı¾İ      yes
+void ClearList(SqList L)                              //æ¸…é™¤çº¿æ€§è¡¨ä¸­çš„æ•°æ®      yes
 {
 	L.ListLength = 0;
 }
 
-bool ListEmpty(SqList L)                             //ÅĞ¶ÏÏßĞÔ±íÊÇ·ñÎª¿Õ±í   yes
+bool ListEmpty(SqList L)                             //åˆ¤æ–­çº¿æ€§è¡¨æ˜¯å¦ä¸ºç©ºè¡¨   yes
 {
 	if (L.ListLength == 0)
 	{   
 		cout << "the list is empty!" << endl;
-		return true;                                 //ÏßĞÔ±íÎª¿Õ,Ôò·µ»ØTRUE
+		return true;                                 //çº¿æ€§è¡¨ä¸ºç©º,åˆ™è¿”å›TRUE
 	}
 	else
 	{
 		cout << "the list is not empty" << endl;
-		return false;                                //ÏßĞÔ±í²»Îª¿Õ£¬Ôò·µ»ØFALSE
+		return false;                                //çº¿æ€§è¡¨ä¸ä¸ºç©ºï¼Œåˆ™è¿”å›FALSE
 	}
 }
 
-int ListLength(SqList L)                             //ÇóÏßĞÔ±íµÄ³¤¶È         yes
+int ListLength(SqList L)                             //æ±‚çº¿æ€§è¡¨çš„é•¿åº¦         yes
 {
 	ElemType length;
 	length = L.ListLength;
 	return length;
 }
 
-ElemType GetElem(SqList L,int i,ElemType &e)         //ÓÃe·µ»ØLÖĞµÚi¸öÔªËØµÄÖµ
+ElemType GetElem(SqList L,int i,ElemType &e)         //ç”¨eè¿”å›Lä¸­ç¬¬iä¸ªå…ƒç´ çš„å€¼
 {
 	if (L.ListLength > 0)
 	{
@@ -88,13 +91,13 @@ bool compare(ElemType First, ElemType &e)
 **/
 
 
-ElemType LocateElem(SqList L, int i, ElemType compare())  //·µ»ØLÖĞµÚ1¸öÓëeÂú×ãµÄ¹ØÏµcompare()µÄÊı¾İÔªËØµÄÎ»Ğò¡£
+ElemType LocateElem(SqList L, int i, ElemType compare())  //è¿”å›Lä¸­ç¬¬1ä¸ªä¸eæ»¡è¶³çš„å…³ç³»compare()çš„æ•°æ®å…ƒç´ çš„ä½åºã€‚
 {
 
 }
 
 
-ElemType PriorElem(SqList L, ElemType e, ElemType &pre_e)         //ÇóÇ°ÇıÔªËØ    yes
+ElemType PriorElem(SqList L, ElemType e, ElemType &pre_e)         //æ±‚å‰é©±å…ƒç´     yes
 {
 	for (int i = 0; i < L.ListLength; i++)
 	{
@@ -119,7 +122,7 @@ ElemType PriorElem(SqList L, ElemType e, ElemType &pre_e)         //ÇóÇ°ÇıÔªËØ  
 	}
 }
 
-ElemType NextElem(SqList L, ElemType cur_e, ElemType &next_e)             //Çóºó¼ÌÔªËØ     yes
+ElemType NextElem(SqList L, ElemType cur_e, ElemType &next_e)             //æ±‚åç»§å…ƒç´      yes
 {
 	for (int i = 0; i < L.ListLength; i++)
 	{
@@ -143,7 +146,7 @@ ElemType NextElem(SqList L, ElemType cur_e, ElemType &next_e)             //Çóºó
 	}
 }
 
-ElemType ListInsert(SqList &L, int i, ElemType e)               //²åÈëÔªËØ   yes
+ElemType ListInsert(SqList &L, int i, ElemType e)               //æ’å…¥å…ƒç´    yes
 {
 	if (L.ListLength > 0)
 	{
@@ -160,7 +163,7 @@ ElemType ListInsert(SqList &L, int i, ElemType e)               //²åÈëÔªËØ   yes
 	}
 }
 
-ElemType ListDelete(SqList &L, int i, ElemType &e)               //É¾³ıÔªËØ    yes
+ElemType ListDelete(SqList &L, int i, ElemType &e)               //åˆ é™¤å…ƒç´     yes
 {	
 	if (L.ListLength > 0)
 	{
