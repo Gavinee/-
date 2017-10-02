@@ -78,9 +78,17 @@ ElemType ListLength(SqList L)
 	return length;
 }
 
-ElemType GetElem(SqList L, int i, ElemType &e)
+ElemType GetElem(SqList L, int i, ElemType &e)          //用e返回L中第i个数据元素的值
 {
-
+	if(i<1||i>L.length)
+	{
+		return OVERFLOW;
+	}
+	else
+	{
+		e=L.elem[i-1];
+		return e;
+	}
 }
 
 
@@ -97,7 +105,7 @@ ElemType LocateElem(SqList L, ElemType e, ElemType compare(ElemType First,ElemTy
 	int i;
 	if (i<0 ||i >L.length)
 	{
-		return FALSE;
+		return OVERFLOW;
 	}
 	else
 	{
@@ -110,7 +118,7 @@ ElemType PriorElem(SqList L, ElemType cur_e, ElemType &pre_e)
 	int i;
 	if (i<0 || i>L.length)
 	{
-		return FALSE;
+		return OVERFLOW;
         }
 	else
 	{
@@ -126,7 +134,7 @@ ElemType PriorElem(SqList L, ElemType cur_e, ElemType &pre_e)
 			}
 			else
 			{
-				return FALSE;
+				return INFEASIBLE;
 			}
 		}
 	}
@@ -137,7 +145,7 @@ ElemType NextElem(SqList L, ElemType cur_e, ElemType &next_e)
 	int i;
 	if (i<0 || i>L.length)
 	{
-		return FALSE;
+		return OVERFLOW;
 	}
 	else
 	{
@@ -152,7 +160,7 @@ ElemType NextElem(SqList L, ElemType cur_e, ElemType &next_e)
 		}
 		else
 		{
-			return FALSE;
+			return INFEASIBLE;
 		}
 	}
 }
@@ -163,7 +171,7 @@ ElemType ListInsert(SqList &L, int i, ElemType e)
 	ElemType *elem = new ElemType[LIST_INIT_SIZE + LISTINCREMENT];
 	if (i<1 || i>L.length)
 	{
-		return ERROR;
+		return OVERFLOW;
 	}
 	else
 	{
@@ -181,7 +189,7 @@ ElemType ListDelete(SqList &L, int i, ElemType &e)
 	int j = 0;
 	if (i < 1 || i > L.length)
 	{
-		return ERROR;
+		return OVERFLOW;
 	}
 	else
 	{
