@@ -192,7 +192,7 @@ ElemType ListInsert(SqList &L, int i, ElemType e)
 	{
 		ElemType *elem = new ElemType[LIST_INIT_SIZE + LISTINCREMENT];
 		if(L.length==NULL)        //检查分配是否相同
-			return Flase;
+			return FALSE;
 		L.listsize+=LISTINCREMENT;
 	}
 	if (i<1 || i>L.length)
