@@ -12,7 +12,7 @@ using namespace std;
 #define LISTINCREMENT     10             //线性表存储空间的分配增量
 
 typedef int ElemType; 
-typedef int Status;
+typedef int Status;                     //Status是函数的类型，其值是函数状态代码
 
 
 
@@ -107,7 +107,7 @@ bool compare(int i, int j)
 		false;
 }
 
-int LocateElem(SqList L, ElemType e, bool compare(ElemType First,ElemType Second))
+Status LocateElem(SqList L, ElemType e, bool compare(ElemType First,ElemType Second))
 {
 	int i;
 	if (i<0 ||i >L.length)
