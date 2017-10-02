@@ -14,11 +14,15 @@ using namespace std;
 typedef int ElemType;                    
 
 
+
+
 typedef struct {
 	ElemType *elem;               //存储空间基址
 	int length;                   //当前长度
 	int listsize;                 //当前分配的存储容量
 }SqList;
+
+
 
 int InitList(SqList &L);                                      //初始化线性表
 void DestroyList(SqList &L);                                   //销毁线性表
@@ -39,6 +43,7 @@ int InitList(SqList &L)
 	ElemType *elem = new ElemType[LIST_INIT_SIZE];
 	if(!L.elem)
 	{
+		cout<<"分配空间失败";
 		return INFEASIBLE;
 	}
 	L.length=0;             //当前长度
@@ -78,14 +83,15 @@ ElemType ListLength(SqList L)
 	return length;
 }
 
-ElemType GetElem(SqList L, int i, ElemType &e)          //用e返回L中第i个数据元素的值
+ElemType GetElem(SqList L, int i, ElemType &e)        
 {
 	if(i<1||i>L.length)
 	{
+		cout<<"数组空间长度溢出";
 		return OVERFLOW;
 	}
 	else
-	{
+	{       
 		e=L.elem[i-1];
 		return e;
 	}
@@ -100,16 +106,26 @@ bool compare(int i, int j)
 		false;
 }
 
-ElemType LocateElem(SqList L, ElemType e, ElemType compare(ElemType First,ElemType Second))
+int LocateElem(SqList L, ElemType e, bool compare(ElemType First,ElemType Second))
 {
 	int i;
 	if (i<0 ||i >L.length)
 	{
+		cout<<"数组空间长度溢出";
 		return OVERFLOW;
 	}
 	else
 	{
-	return compare(e, L.elem[i]);
+	     if(compare(e, L.elem[i]))
+	     {
+		     cout<<"返回第i个元素值";
+		     return i;
+	     }
+	     else
+	     {
+		     cout<<"数组中没有匹配的值";
+		     return INFEASIBLE;
+	     }
 	}
 }
 
@@ -118,6 +134,7 @@ ElemType PriorElem(SqList L, ElemType cur_e, ElemType &pre_e)
 	int i;
 	if (i<0 || i>L.length)
 	{
+		cout<<"数组空间长度溢出";
 		return OVERFLOW;
         }
 	else
@@ -134,6 +151,7 @@ ElemType PriorElem(SqList L, ElemType cur_e, ElemType &pre_e)
 			}
 			else
 			{
+				cout<<"没有前驱";
 				return INFEASIBLE;
 			}
 		}
@@ -145,6 +163,7 @@ ElemType NextElem(SqList L, ElemType cur_e, ElemType &next_e)
 	int i;
 	if (i<0 || i>L.length)
 	{
+		cout<<"数组空间长度溢出";
 		return OVERFLOW;
 	}
 	else
@@ -160,6 +179,7 @@ ElemType NextElem(SqList L, ElemType cur_e, ElemType &next_e)
 		}
 		else
 		{
+			cout<<"没有后继";
 			return INFEASIBLE;
 		}
 	}
@@ -171,6 +191,7 @@ ElemType ListInsert(SqList &L, int i, ElemType e)
 	ElemType *elem = new ElemType[LIST_INIT_SIZE + LISTINCREMENT];
 	if (i<1 || i>L.length)
 	{
+		cout<<"数组空间长度溢出";
 		return OVERFLOW;
 	}
 	else
@@ -189,6 +210,7 @@ ElemType ListDelete(SqList &L, int i, ElemType &e)
 	int j = 0;
 	if (i < 1 || i > L.length)
 	{
+		cout<<"数组空间长度溢出";
 		return OVERFLOW;
 	}
 	else
