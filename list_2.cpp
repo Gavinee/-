@@ -40,14 +40,14 @@ void ListTraverse(SqList L,void visit(int i));                      //遍历线�
 
 int InitList(SqList &L)
 {
+	L.listsize=LIST_INIT_SIZE;    //当前分配量
+	L.length=0;             //当前长度
 	ElemType *elem = new ElemType[LIST_INIT_SIZE];
 	if(!L.elem)
 	{
 		cout<<"分配空间失败";
 		return INFEASIBLE;
 	}
-	L.length=0;             //当前长度
-	L.listsize=LIST_INIT_SIZE;    //当前分配量
         return 0;	
 }
 
