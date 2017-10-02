@@ -54,6 +54,7 @@ int InitList(SqList &L)
 void DestroyList(SqList &L)
 {
 	L.listsize = 0;
+	L.length = 0;
 	delete L.elem;
 }
 
