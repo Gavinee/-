@@ -61,7 +61,6 @@ void DestroyList(SqList &L)
 void ClearList(SqList L)
 {
 	L.length = 0;
-	L.listsize = 0;
 }
 
 bool ListEmpty(SqList L)
@@ -189,7 +188,13 @@ ElemType NextElem(SqList L, ElemType cur_e, ElemType &next_e)
 ElemType ListInsert(SqList &L, int i, ElemType e)
 {
 	int j;
-	ElemType *elem = new ElemType[LIST_INIT_SIZE + LISTINCREMENT];
+	if(L.length==L.LIST_INIT_SIZE)
+	{
+		ElemType *elem = new ElemType[LIST_INIT_SIZE + LISTINCREMENT];
+		if(L.length==NULL)        //检查分配是否相同
+			return Flase;
+		L.listsize+=LISTINCREMENT;
+	}
 	if (i<1 || i>L.length)
 	{
 		cout<<"数组空间长度溢出";
