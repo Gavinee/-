@@ -35,7 +35,7 @@ ElemType PriorElem(SqList L, ElemType cur_e, ElemType &pre_e);     //返回pre_e
 ElemType NextElem(SqList L,ElemType cur_e,ElemType &next_e);   //返回next_e返回它的前驱
 ElemType ListInsert(SqList &L,int i,ElemType e);               //插入新的数据元素e,L的长度加1
 ElemType ListDelete(SqList &L,int i,ElemType &e);              //删除L的第i个数据元素，并用e返回其值，L的长度减1
-bool ListTraverse(SqList L,bool visit());                      
+void ListTraverse(SqList L,void visit(int i));                      //遍历线性表(线性表中元素都访问一次，且只访问一次)
 //依次对L的每个元素元素调用函数visit(),一旦visit()失败,则操作失败
 
 int InitList(SqList &L)
@@ -223,7 +223,17 @@ ElemType ListDelete(SqList &L, int i, ElemType &e)
 	}
 }
 
-bool ListTraverse(SqList L, bool visit())
-{
 
+
+void visit(int i)
+{
+	cout<<i;
+}
+
+void ListTraverse(SqList L, void visit(int i))
+{
+	for(int j=0;j<L.length;j++)
+	{
+		visit(L.elem[j]);
+	}
 }
