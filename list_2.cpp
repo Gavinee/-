@@ -26,23 +26,23 @@ typedef struct {
 
 
 Status InitList(SqList &L);                                      //初始化线性表
-void DestroyList(SqList &L);                                   //销毁线性表
-void ClearList(SqList L);                                      //清空线性表
-bool ListEmpty(SqList L);                                      //判断线性表是否为空
-Status ListLength(SqList L);                                 //求线性表的长度
-Status GetElem(SqList L,int i,ElemType &e);                  //用e返回L中第i个数据元素的值
-Status LocateElem(SqList L, ElemType e, ElemType compare());      //返回e满足关系compare()的数据元素的位序，若这样的数据元素不存在，则返回值为0
+void DestroyList(SqList &L);                                     //销毁线性表
+void ClearList(SqList L);                                        //清空线性表
+bool ListEmpty(SqList L);                                        //判断线性表是否为空
+Status ListLength(SqList L);                                     //求线性表的长度
+Status GetElem(SqList L,int i,ElemType &e);                      //用e返回L中第i个数据元素的值
+Status LocateElem(SqList L, ElemType e, ElemType compare());     //返回e满足关系compare()的数据元素的位序，若这样的数据元素不存在，则返回值为0
 Status PriorElem(SqList L, ElemType cur_e, ElemType &pre_e);     //返回pre_e返回它的后继
-Status NextElem(SqList L,ElemType cur_e,ElemType &next_e);   //返回next_e返回它的前驱
-Status ListInsert(SqList &L,int i,ElemType e);               //插入新的数据元素e,L的长度加1
-Status ListDelete(SqList &L,int i,ElemType &e);              //删除L的第i个数据元素，并用e返回其值，L的长度减1
-void ListTraverse(SqList L,void visit(int i));                      //遍历线性表(线性表中元素都访问一次，且只访问一次)
-//依次对L的每个元素元素调用函数visit(),一旦visit()失败,则操作失败
+Status NextElem(SqList L,ElemType cur_e,ElemType &next_e);       //返回next_e返回它的前驱
+Status ListInsert(SqList &L,int i,ElemType e);                   //插入新的数据元素e,L的长度加1
+Status ListDelete(SqList &L,int i,ElemType &e);                  //删除L的第i个数据元素，并用e返回其值，L的长度减1
+void ListTraverse(SqList L,void visit(int i));                   //遍历线性表(线性表中元素都访问一次，且只访问一次)
+                                                                 //依次对L的每个元素元素调用函数visit(),一旦visit()失败,则操作失败
 
 Status InitList(SqList &L)
 {
-	L.listsize=LIST_INIT_SIZE;    //当前分配量
-	L.length=0;             //当前长度
+	L.listsize=LIST_INIT_SIZE;                               //当前分配量
+	L.length=0;                                              //当前长度
 	ElemType *elem = new ElemType[LIST_INIT_SIZE];
 	if(!L.elem)
 	{
