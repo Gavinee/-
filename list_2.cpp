@@ -41,15 +41,15 @@ void ListTraverse(SqList L,void visit(int i));                   //遍历线性�
 
 Status InitList(SqList &L)
 {
+	ElemType *elem = new ElemType[LIST_INIT_SIZE];
 	L.listsize=LIST_INIT_SIZE;                               //当前分配量
 	L.length=0;                                              //当前长度
-	ElemType *elem = new ElemType[LIST_INIT_SIZE];
 	if(!L.elem)
 	{
 		cout<<"分配空间失败";
 		return INFEASIBLE;
 	}
-        return 0;	
+        return OK;	
 }
 
 void DestroyList(SqList &L)
@@ -88,8 +88,8 @@ Status GetElem(SqList L, int i, ElemType &e)
 {
 	if(i<1||i>L.length)
 	{
-		cout<<"数组空间长度溢出";
-		return OVERFLOW;
+		cout<<"i值不合法";
+		return ERROR;
 	}
 	else
 	{       
@@ -112,8 +112,8 @@ Status LocateElem(SqList L, ElemType e, bool compare(ElemType First,ElemType Sec
 	int i;
 	if (i<0 ||i >L.length)
 	{
-		cout<<"数组空间长度溢出";
-		return OVERFLOW;
+		cout<<"i值不合法";
+		return ERROR;
 	}
 	else
 	{
@@ -135,8 +135,8 @@ Status PriorElem(SqList L, ElemType cur_e, ElemType &pre_e)
 	int i;
 	if (i<0 || i>L.length)
 	{
-		cout<<"数组空间长度溢出";
-		return OVERFLOW;
+		cout<<"i值不合法";
+		return ERROR;
         }
 	else
 	{
@@ -164,8 +164,8 @@ Status NextElem(SqList L, ElemType cur_e, ElemType &next_e)
 	int i;
 	if (i<0 || i>L.length)
 	{
-		cout<<"数组空间长度溢出";
-		return OVERFLOW;
+		cout<<"i值不合法";
+		return ERROR;
 	}
 	else
 	{
@@ -189,25 +189,26 @@ Status NextElem(SqList L, ElemType cur_e, ElemType &next_e)
 Status ListInsert(SqList &L, int i, ElemType e)
 {
 	int j;
-	if(L.length==L.LIST_INIT_SIZE)
+	if(L.length>=L.listsize)                        //当前存储空间已满，增加分配
 	{
 		ElemType *elem = new ElemType[LIST_INIT_SIZE + LISTINCREMENT];
-		if(L.length==NULL)        //检查分配是否相同
-			return FALSE;
-		L.listsize+=LISTINCREMENT;
+		if(L.length==NULL)                      //检查分配是否相同
+			return OVERFLOW;
+		L.listsize+=LISTINCREMENT;              //增加存储容量
 	}
 	if (i<1 || i>L.length)
 	{
-		cout<<"数组空间长度溢出";
-		return OVERFLOW;
+		cout<<"i的值不合法";
+		return ERROR;
 	}
 	else
 	{
 		for (j = L.length; j >= i; j++)
 		{
-			L.elem[j] = L.elem[j-1];
+			L.elem[j] = L.elem[j-1];        //元素右移
 		}
-		L.elem[j]=e;
+		L.elem[j]=e;                             //插入e
+		++L.length;                              //表长增1
 	}
 }
 
@@ -217,8 +218,8 @@ Status ListDelete(SqList &L, int i, ElemType &e)
 	int j = 0;
 	if (i < 1 || i > L.length)
 	{
-		cout<<"数组空间长度溢出";
-		return OVERFLOW;
+		cout<<"i值不合法";
+		return ERROR;
 	}
 	else
 	{
@@ -227,6 +228,7 @@ Status ListDelete(SqList &L, int i, ElemType &e)
 			L.elem[j-1] = L.elem[j];
 		}
 		L.elem[j - 1] = e;
+	        --L.length;                         //表长减1
 	}
 }
 
