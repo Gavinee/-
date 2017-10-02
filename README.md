@@ -9,3 +9,6 @@
 还有两个函数没有实现:
 ElemType LocateElem(SqList L, int i, ElemType compare())
 ElemType ListTraverse(SqList L, ElemType visit())
+
+---------------------------------------------------------------
+2017.10.2号更新  list_2为线性表的数据结构，经过多次修改，基本上已经完善的差不多了。
