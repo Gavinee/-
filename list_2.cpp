@@ -179,7 +179,7 @@ ElemType ListInsert(SqList &L, int i, ElemType e)
 ElemType ListDelete(SqList &L, int i, ElemType &e)
 {
 	int j = 0;
-	if (i < 1 || i < L.length)
+	if (i < 1 || i > L.length)
 	{
 		return ERROR;
 	}
