@@ -20,7 +20,7 @@ typedef struct {
 	int listsize;                 //当前分配的存储容量
 }SqList;
 
-void InitList(SqList &L);                                      //初始化线性表
+int InitList(SqList &L);                                      //初始化线性表
 void DestroyList(SqList &L);                                   //销毁线性表
 void ClearList(SqList L);                                      //清空线性表
 bool ListEmpty(SqList L);                                      //判断线性表是否为空
@@ -34,14 +34,16 @@ ElemType ListDelete(SqList &L,int i,ElemType &e);              //删除L的第i�
 bool ListTraverse(SqList L,bool visit());                      
 //依次对L的每个元素元素调用函数visit(),一旦visit()失败,则操作失败
 
-void InitList(SqList &L)
+int InitList(SqList &L)
 {
-	if (L.length != 0)
+	ElemType *elem = new ElemType[LIST_INIT_SIZE];
+	if(!L.elem)
 	{
-		ElemType *elem = new ElemType[LIST_INIT_SIZE];
-		L.length = 0;
-		L.listsize = 0;
+		return INFEASIBLE;
 	}
+	L.length=0;             //当前长度
+	L.listsize=LIST_INIT_SIZE;    //当前分配量
+        return 0;	
 }
 
 void DestroyList(SqList &L)
@@ -84,7 +86,8 @@ ElemType GetElem(SqList L, int i, ElemType &e)
 
 bool compare(int i, int j)
 {
-	if (i == j) return true;
+	if (i == j)
+		return true;
 	else
 		false;
 }
@@ -108,7 +111,7 @@ ElemType PriorElem(SqList L, ElemType cur_e, ElemType &pre_e)
 	if (i<0 || i>L.length)
 	{
 		return FALSE;
-    }
+        }
 	else
 	{
 		for (i = 0; i < L.length; i++)
@@ -158,7 +161,7 @@ ElemType ListInsert(SqList &L, int i, ElemType e)
 {
 	int j;
 	ElemType *elem = new ElemType[LIST_INIT_SIZE + LISTINCREMENT];
-	if (i<1 || i>L.length+1)
+	if (i<1 || i>L.length)
 	{
 		return ERROR;
 	}
