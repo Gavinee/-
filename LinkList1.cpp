@@ -144,9 +144,6 @@ http://www.cnblogs.com/assemble8086/archive/2011/10/02/2198308.html
 模板函数，实现链表
 http://www.cnblogs.com/jingmoxukong/p/3827011.html
 
-const的作用
-http://blog.csdn.net/Eric_Jo/article/details/4138548
-
 重载操作符:
 http://blog.csdn.net/u010270148/article/details/41820117
 http://www.cnblogs.com/zpcdbky/p/5027481.html
