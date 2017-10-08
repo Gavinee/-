@@ -385,8 +385,7 @@ void LinkList<T>::Reverse()
 template<class T>
 void LinkList<T>::SetHead(LinkList<T> *p)
 {
-	LinkNode<T> *p;
-	LinkNode<T> p=new LinkNode;
+	LinkList<T> p=new LinkList;
 }
 
 
@@ -410,9 +409,10 @@ LinkNode<T>* Linklist<T>::GetHead()const
 LinklistNode<T>* LinkList<T>::Find(T &item)
 {
 	LinkNode<T> *p;
+	int i=1;
 	p=head->next;
 	if(head->data==item)
-		return head;
+		return i;
 	while(p->data==item)
 	{
 		if(p->next==NULL)
@@ -420,9 +420,9 @@ LinklistNode<T>* LinkList<T>::Find(T &item)
 			return ;
 		}
 		p=p->next;
-
+		i++;
 	}
-	return p;
+	return i;
 }
 
 
@@ -432,7 +432,7 @@ bool GetData(int pos, T &item)
 	LinkNode<T> *p;
 	int i=0;
 	p=head->next;
-	if(pos<1||pos>Length())
+	if(pos<1&&pos>Length())
 	{
 		return false;
 	}
